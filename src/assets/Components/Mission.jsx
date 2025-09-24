@@ -76,7 +76,7 @@ function Mission() {
     // Counter animations for each statistic
     statsTimeline
       .to(statsRefs.current[0], {
-        textContent: 15,
+        textContent: 7,
         duration: 2,
         snap: { textContent: 1 },
         ease: "power2.out"
@@ -92,7 +92,7 @@ function Mission() {
         }
       }, "-=1.5")
       .to(statsRefs.current[2], {
-        textContent: "500+",
+        textContent: "650+",
         duration: 2,
         ease: "power2.out",
         onUpdate: function() {

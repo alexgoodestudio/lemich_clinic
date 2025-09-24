@@ -56,7 +56,19 @@
   }
 }
 
+.zoom {
+  transition: transform 0.3s ease-in-out;
+}
 
+.zoom:hover {
+  transform: scale(1.08);
+}
+/* For mobile devices (where hover isn’t available) */
+@media (hover: none) {
+  .zoom.in-view {
+    transform: scale(1.08);
+  }
+}
 /* Headings */
 .text-16xl { font-size: 18rem; line-height: 1.05; } /* ~288px */
 .text-15xl { font-size: 16rem; line-height: 1.05; } /* ~256px */
