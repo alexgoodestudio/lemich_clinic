@@ -1,6 +1,6 @@
 import img1 from "../Images/1.avif";
-import img2 from "../images/2.avif";
-import img3 from "../images/3.avif";
+import img2 from "../Images/2.avif";
+import img3 from "../Images/3.avif";
 import { FileText, Group, History } from "lucide-react";
 import { useEffect } from "react";
 
