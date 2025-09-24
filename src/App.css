@@ -2,6 +2,61 @@
 @import "tailwindcss";
 @tailwind utilities;
 
+@font-face {
+  font-family: "Tomorrow";
+  src: url("./Components/fonts/Tomorrow-Medium.ttf") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.tomorrow {
+  font-family: "Tomorrow", sans-serif;
+}
+
+.bg-tricare {
+  background-color: hsla(158, 48%, 18%);
+}
+
+.light-blue {
+  color: #b5cde7;
+}
+
+.mission-accent-line {
+  height: 4px;
+  width: 0%;
+  border-radius: 2px;
+}
+
+.mission-text-container {
+  padding-left: 2rem;
+  border-left: 1px solid #e2e8f0;
+  position: relative;
+}
+
+.mission-text-container::before {
+  content: '';
+  position: absolute;
+  left: -2px;
+  top: 0;
+  width: 4px;
+  height: 60px;
+  background-color: #10b981;
+  border-radius: 2px;
+}
+
+@media (max-width: 768px) {
+  .mission-text-container {
+    padding-left: 0;
+    border-left: none;
+    margin-top: 2rem;
+  }
+  
+  .mission-text-container::before {
+    display: none;
+  }
+}
+
+
 /* Headings */
 .text-16xl { font-size: 18rem; line-height: 1.05; } /* ~288px */
 .text-15xl { font-size: 16rem; line-height: 1.05; } /* ~256px */
