@@ -15,8 +15,8 @@ function Home() {
       <Mission/>
       <ServiceCards />
       <Tricare />
-      <Footer />
       <Banner />
+      <Footer />
       {/* <FooterBase /> */}
     </div>
   );
