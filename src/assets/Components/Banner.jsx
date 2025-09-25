@@ -37,8 +37,8 @@ function Banner() {
   return (
     <div 
       ref={marqueeRef}
-      className="overflow-hidden  text-slate-700 bg-slate-50 whitespace-nowrap relative w-full "
-      style={{ height: '120px' }}
+      className="overflow-hidden  text-slate-800 bg-slate-300 whitespace-nowrap relative w-full "
+      style={{ height: '140px' }}
     >
       <h1 
         ref={textRef}

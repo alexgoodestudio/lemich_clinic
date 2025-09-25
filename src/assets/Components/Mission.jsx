@@ -112,7 +112,7 @@ function Mission() {
 
   return (
     <section ref={containerRef} className="py-5">
-      <div className="container">
+      <div className="px-5">
         {/* Bento-style grid layout */}
         <div className="row g-0">
           

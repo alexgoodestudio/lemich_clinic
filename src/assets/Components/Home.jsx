@@ -5,6 +5,7 @@ import Mission from "./Mission";
 import ServiceCards from "./ServiceCards";
 import Tricare from "./Tricare";
 import Footer from "./Footer";
+import FooterBase from "./FooterBase";
 
 function Home() {
   return (
@@ -14,8 +15,9 @@ function Home() {
       <Mission/>
       <ServiceCards />
       <Tricare />
+      <Footer />
       <Banner />
-      <Footer/>
+      {/* <FooterBase /> */}
     </div>
   );
 }
