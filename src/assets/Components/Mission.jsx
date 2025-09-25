@@ -101,20 +101,12 @@ function Mission() {
           this.targets()[0].textContent = value + "+";
         }
       }, "-=1.5")
-      .to(statsRefs.current[3], {
-        textContent: "24/7",
-        duration: 2,
-        ease: "power2.out",
-        onUpdate: function() {
-          const progress = this.progress();
-          if (progress < 0.5) {
-            const hours = Math.round(progress * 48);
-            this.targets()[0].textContent = hours + "/7";
-          } else {
-            this.targets()[0].textContent = "24/7";
-          }
-        }
-      }, "-=1.5");
+.to(statsRefs.current[3], {
+  textContent: 14,
+  duration: 2,
+  snap: { textContent: 1 },
+  ease: "power2.out"
+}, "-=1.5");
 
   }, { scope: containerRef });
 
@@ -185,8 +177,8 @@ function Mission() {
     <div className="text-sm text-slate-500 mt-1">Service Members Helped</div>
   </div>
   <div className="col-6 col-lg-3 mb-4 mb-lg-0">
-    <div ref={el => statsRefs.current[3] = el} className="text-3xl font-bold text-slate-900">0/7</div>
-    <div className="text-sm text-slate-500 mt-1">Days Available</div>
+    <div ref={el => statsRefs.current[3] = el} className="text-3xl font-bold text-slate-900">0</div>
+    <div className="text-sm text-slate-500 mt-1">Clinicians</div>
   </div>
 </div>
 

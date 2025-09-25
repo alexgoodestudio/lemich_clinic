@@ -51,11 +51,11 @@ function Hero() {
             <img src={unit} alt="creek" className="w-100 h-auto rounded-lg shadow-lg" />
           </div>
           <div className="col-lg-2 p-5 border-l border-l-gray-300">
-<p className="border-b py-2 border-b-gray-300">PTSD Treatment</p>
-<p className="border-b py-2 border-b-gray-300">Trauma Therapy</p>
-<p className="border-b py-2 border-b-gray-300">Family Counseling</p>
-<p className="border-b py-2 border-b-gray-300">Military Transitions</p>
-<p className="border-b py-2 border-b-gray-300">VA Paperwork</p>
+<p className="border-b py-2 border-b-gray-300 font-semibold">PTSD Treatment</p>
+<p className="border-b py-2 border-b-gray-300 font-semibold">Trauma Therapy</p>
+<p className="border-b py-2 border-b-gray-300 font-semibold">Family Counseling</p>
+<p className="border-b py-2 border-b-gray-300 font-semibold">Military Transitions</p>
+<p className="border-b py-2 border-b-gray-300 font-semibold">VA Paperwork</p>
           </div>
         </div>
         </div>

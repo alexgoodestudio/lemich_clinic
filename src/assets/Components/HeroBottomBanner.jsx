@@ -4,7 +4,7 @@ function HeroBottomBanner() {
             <div className="text-start">
                 <p className="text-4xl mb-2">Your Mental Health Matters</p>
                 <p className="text-lg mb-4">Compassionate care for veterans and active duty service members.</p>
-                <button className="rounded px-5 py-4 bg-blue-200 text-slate-900" aria-label="Contact The Lemich Clinic">Contact Us</button>
+                <button className="rounded px-4 py-2 bg-blue-200 text-slate-900" aria-label="Contact The Lemich Clinic">Contact Us</button>
             </div>
         </div>
     )

@@ -37,14 +37,14 @@ function Banner() {
   return (
     <div 
       ref={marqueeRef}
-      className="overflow-hidden  text-slate-600 bg-slate-100 whitespace-nowrap relative w-full "
+      className="overflow-hidden  text-slate-700 bg-slate-50 whitespace-nowrap relative w-full "
       style={{ height: '120px' }}
     >
       <h1 
         ref={textRef}
         className="text-5xl font-extrabold py-5 absolute top-1/2 transform -translate-y-1/2  text-transparent bg-clip-text "
       >
-        Request confidential mental health support today &nbsp; <span className='mx-3'>•</span> &nbsp; Located in Norfolk, Virginia &nbsp; <span className='mx-3'>•</span> &nbsp; Request confidential mental health support today &nbsp; <span className='mx-3'>•</span> &nbsp; Located in Norfolk, Virginia &nbsp; <span className='mx-3'>•</span> &nbsp;
+        Request confidential mental health support today &nbsp; <span className='mx-3'>•</span> &nbsp; Located in Norfolk, Virginia &nbsp; <span className='mx-3'>•</span> &nbsp; Request confidential mental health support today &nbsp; <span className='mx-3'>•</span> &nbsp; Located in Norfolk, Virginia &nbsp; <span className='mx-3'>•</span> &nbsp;Request confidential mental health support today &nbsp; <span className='mx-3'>•</span> &nbsp; Located in Norfolk, Virginia &nbsp; <span className='mx-3'>•</span> &nbsp; Request confidential mental health support today &nbsp; <span className='mx-3'>•</span> &nbsp; Located in Norfolk, Virginia &nbsp; <span className='mx-3'>•</span> &nbsp;
       </h1>
     </div>
   );

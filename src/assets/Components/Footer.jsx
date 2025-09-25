@@ -2,7 +2,7 @@
 
 function Footer() {
   return (
-    <footer className="bg-slate-200 px-6 pt-12 pb-8 text-center md:text-left">
+    <footer className="bg-slate-2ç00 px-6 pt-12 pb-8 text-center md:text-left">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 max-w-6xl">
         <div className="flex flex-col space-y-3 md:pr-6 text-start">
        
