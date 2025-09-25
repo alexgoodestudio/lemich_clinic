@@ -69,6 +69,17 @@
     transform: scale(1.08);
   }
 }
+
+.footer-link {
+  color: #4b5563; /* text-gray-600 */
+  text-decoration: none; /* Remove underline */
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  color: #000000; /* Pure black on hover */
+  text-decoration: none; /* Ensure underline doesn't appear on hover */
+}
 /* Headings */
 .text-16xl { font-size: 18rem; line-height: 1.05; } /* ~288px */
 .text-15xl { font-size: 16rem; line-height: 1.05; } /* ~256px */

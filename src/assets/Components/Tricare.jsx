@@ -5,7 +5,7 @@ function Tricare() {
     <div className="bg-tricare text-white py-5">
       <div className="container">
         <div className="row justify-content-center">
-          <div className="col-lg-9">
+          <div className="col-lg-12">
             <h2 className="tomorrow mb-4">
               TRICARE <span className="light-blue">ACCEPTED</span>
             </h2>

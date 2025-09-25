@@ -24,7 +24,7 @@ function Hero() {
             </div>
 
             <p className="text-lg text-slate-600 mb-4  ">
-              Dedicated to the Mental Health of Norfolk’s Military Community — specializing in
+              Dedicated to the Mental Health of Norfolk, Virginia's Military Community — specializing in
               trauma-informed care, PTSD treatment, VA paperwork support, and confidential clinical
               services for active duty, veterans and families.
             </p>

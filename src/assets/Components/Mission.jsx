@@ -171,44 +171,27 @@ function Mission() {
         {/* Statistics section with counter animations */}
         <div className="row mt-5 pt-4">
           <div className="col-12">
-            <div className="mission-stats-grid d-flex justify-content-between align-items-center flex-wrap gap-4">
-              <div className="mission-stat-item text-center">
-                <div 
-                  ref={el => statsRefs.current[0] = el}
-                  className="text-3xl font-bold text-slate-900"
-                >
-                  0
-                </div>
-                <div className="text-sm text-slate-500 mt-1">Years of Service</div>
-              </div>
-              <div className="mission-stat-item text-center">
-                <div 
-                  ref={el => statsRefs.current[1] = el}
-                  className="text-3xl font-bold text-slate-900"
-                >
-                  0%
-                </div>
-                <div className="text-sm text-slate-500 mt-1">TRICARE Coverage</div>
-              </div>
-              <div className="mission-stat-item text-center">
-                <div 
-                  ref={el => statsRefs.current[2] = el}
-                  className="text-3xl font-bold text-slate-900"
-                >
-                  0+
-                </div>
-                <div className="text-sm text-slate-500 mt-1">Service Members Helped</div>
-              </div>
-              <div className="mission-stat-item text-center">
-                <div 
-                  ref={el => statsRefs.current[3] = el}
-                  className="text-3xl font-bold text-slate-900"
-                >
-                  0/7
-                </div>
-                <div className="text-sm text-slate-500 mt-1">Days Available</div>
-              </div>
-            </div>
+<div className="row mission-stats-grid text-center mt-5 pt-4">
+  <div className="col-6 col-lg-3 mb-4 mb-lg-0">
+    <div ref={el => statsRefs.current[0] = el} className="text-3xl font-bold text-slate-900">0</div>
+    <div className="text-sm text-slate-500 mt-1">Years of Service</div>
+  </div>
+  <div className="col-6 col-lg-3 mb-4 mb-lg-0">
+    <div ref={el => statsRefs.current[1] = el} className="text-3xl font-bold text-slate-900">0%</div>
+    <div className="text-sm text-slate-500 mt-1">TRICARE Coverage</div>
+  </div>
+  <div className="col-6 col-lg-3 mb-4 mb-lg-0">
+    <div ref={el => statsRefs.current[2] = el} className="text-3xl font-bold text-slate-900">0+</div>
+    <div className="text-sm text-slate-500 mt-1">Service Members Helped</div>
+  </div>
+  <div className="col-6 col-lg-3 mb-4 mb-lg-0">
+    <div ref={el => statsRefs.current[3] = el} className="text-3xl font-bold text-slate-900">0/7</div>
+    <div className="text-sm text-slate-500 mt-1">Days Available</div>
+  </div>
+</div>
+
+
+
           </div>
         </div>
       </div>
