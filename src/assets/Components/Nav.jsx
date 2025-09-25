@@ -36,6 +36,14 @@ function Nav() {
           <li>
             <Link
               className="!text-slate-900 !no-underline font-semibold !hover:text-slate-600"
+              to="/insurance"
+            >
+              Insurance
+            </Link>
+          </li>
+          <li>
+            <Link
+              className="!text-slate-900 !no-underline font-semibold !hover:text-slate-600"
               to="/team"
             >
               Team
@@ -49,6 +57,7 @@ function Nav() {
               Services
             </Link>
           </li>
+
           <li>
             <Link
               className="!text-slate-900 !no-underline font-semibold !hover:text-slate-600"
@@ -81,6 +90,16 @@ function Nav() {
             </Link>
           </li>
           <li>
+                      <li>
+            <Link
+              className="!text-slate-900 !no-underline font-semibold !hover:text-slate-600"
+              to="/insurance"
+              onClick={() => setIsOpen(false)}
+            >
+              Insurance
+            </Link>
+          </li>
+          <li></li>
             <Link
               className="!text-slate-900 !no-underline font-semibold !hover:text-slate-600"
               to="/team"
