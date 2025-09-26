@@ -43,7 +43,7 @@ function ServiceCards() {
   };
 
   return (
-    <section className="content-module bg-slate-100">
+    <section className="content-module border border-t bg-slate-50">
       <div className=" mx-auto px-4">
         {/* Section Heading */}
         <div className="text-center mb-12">
@@ -59,7 +59,7 @@ function ServiceCards() {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="p-6 rounded-2xl bg-white border border-stone-200 transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg"
+              className="p-6 rounded-2xl bg-slate-50 border border-stone-200 transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg"
             >
               <div className="mb-6 text-stone-600">
                 <i className={`fas ${feature.icon} fa-2x`}></i>
