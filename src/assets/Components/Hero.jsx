@@ -11,6 +11,8 @@ function Hero() {
   const currentImageRef = useRef(0);
   const [openIndex, setOpenIndex] = useState(null);
   const [hoverIndex, setHoverIndex] = useState(null);
+  const serviceRefs = useRef([]);
+  const textRefs = useRef([]);
 
   const services = [
     {
@@ -62,6 +64,35 @@ function Hero() {
     const interval = setInterval(slideAnimation, 6000);
     return () => clearInterval(interval);
   }, []);
+
+  // GSAP hover animations
+  const handleMouseEnter = (index) => {
+    setHoverIndex(index);
+    
+    const textElement = textRefs.current[index];
+    if (textElement && window.innerWidth >= 768) { // md breakpoint
+      gsap.to(textElement, {
+        height: "auto",
+        opacity: 1,
+        duration: 0.4,
+        ease: "power2.out"
+      });
+    }
+  };
+
+  const handleMouseLeave = (index) => {
+    setHoverIndex(null);
+    
+    const textElement = textRefs.current[index];
+    if (textElement && window.innerWidth >= 768) { // md breakpoint
+      gsap.to(textElement, {
+        height: 0,
+        opacity: 0,
+        duration: 0.3,
+        ease: "power2.in"
+      });
+    }
+  };
 
   const toggle = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -136,10 +167,11 @@ function Hero() {
             {services.map((service, index) => (
               <div
                 key={index}
-                className="border-b border-b-gray-300 py-3 cursor-pointer group"
+                ref={(el) => (serviceRefs.current[index] = el)}
+                className="border-b border-b-gray-300 py-3 cursor-pointer"
                 onClick={() => toggle(index)}
-                onMouseEnter={() => setHoverIndex(index)}
-                onMouseLeave={() => setHoverIndex(null)}
+                onMouseEnter={() => handleMouseEnter(index)}
+                onMouseLeave={() => handleMouseLeave(index)}
               >
                 <div className="flex justify-between items-center">
                   <p className="font-semibold mb-0">{service.title}</p>
@@ -157,8 +189,15 @@ function Hero() {
                   )}
                 </div>
 
-                {/* Desktop expand (hover only) */}
-                <div className="hidden md:block max-h-0 overflow-hidden group-hover:max-h-40 transition-all duration-300 ease-in-out text-gray-600 text-sm mt-2">
+                {/* Desktop expand (hover with GSAP) */}
+                <div
+                  ref={(el) => (textRefs.current[index] = el)}
+                  className="hidden md:block overflow-hidden text-gray-600 text-sm mt-2"
+                  style={{
+                    height: 0,
+                    opacity: 0,
+                  }}
+                >
                   {service.text}
                 </div>
               </div>

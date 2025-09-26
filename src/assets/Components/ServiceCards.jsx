@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import { gsap } from "gsap";
 
 const features = [
   {
@@ -25,7 +26,21 @@ const features = [
 
 function ServiceCards() {
   const [openIndex, setOpenIndex] = useState(null);
-  const toggle = (index) => setOpenIndex(openIndex === index ? null : index);
+  const [hoverIndex, setHoverIndex] = useState(null);
+  const textRefs = useRef([]);
+
+  // GSAP hover animations for desktop cards
+  const handleMouseEnter = (index) => {
+    setHoverIndex(index);
+  };
+
+  const handleMouseLeave = (index) => {
+    setHoverIndex(null);
+  };
+
+  const toggle = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
 
   return (
     <section className="content-module bg-slate-100">
@@ -57,27 +72,29 @@ function ServiceCards() {
           ))}
         </div>
 
-        {/* Mobile Accordion */}
-        <div className="md:hidden space-y-4">
+        {/* Mobile Accordion - Hero Style */}
+        <div className="md:hidden pb-5">
           {features.map((feature, index) => (
             <div
               key={index}
-              className="rounded-xl border border-stone-200 overflow-hidden"
+              className="border-b border-b-gray-300 py-3 cursor-pointer"
+              onClick={() => toggle(index)}
+              onMouseEnter={() => handleMouseEnter(index)}
+              onMouseLeave={() => handleMouseLeave(index)}
             >
-              <button
-                onClick={() => toggle(index)}
-                className="flex items-center justify-between w-full p-4 bg-stone-50 hover:bg-stone-100 transition"
-              >
-                <span className="flex items-center gap-3 text-lg font-medium text-slate-900">
-                  <i className={`fas ${feature.icon}`}></i>
-                  {feature.title}
-                </span>
-                <span className="text-xl font-bold text-slate-600">
+              <div className="flex justify-between items-center">
+                <div className="flex items-center gap-3">
+                  <i className={`fas ${feature.icon} text-slate-600`}></i>
+                  <p className="font-semibold mb-0 text-slate-900">{feature.title}</p>
+                </div>
+                <span className="text-xl text-slate-600">
                   {openIndex === index ? "−" : "+"}
                 </span>
-              </button>
+              </div>
+
+              {/* Mobile expand (click) */}
               {openIndex === index && (
-                <div className="p-4 bg-white text-gray-700 text-sm">
+                <div className="mt-3 text-gray-600 text-sm pl-8">
                   {feature.text}
                 </div>
               )}
