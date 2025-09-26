@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: "Tomorrow";
-  src: url("./Components/fonts/Tomorrow-Medium.ttf") format("woff2");
+  src: url("../public/Fonts/Tomorrow-Medium.ttf") format("woff2");
   font-weight: normal;
   font-style: normal;
 }
