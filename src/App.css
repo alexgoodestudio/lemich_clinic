@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: "Tomorrow";
-  src: url("../public/Fonts/Tomorrow-Medium.ttf") format("woff2");
+  src: url("/Fonts/Tomorrow-Medium.ttf") format("woff2");
   font-weight: normal;
   font-style: normal;
 }
@@ -28,6 +28,33 @@
 .tracking-wider {
   letter-spacing: 0.05em;
 }
+/* Navigation specific utilities */
+.backdrop-blur-md { backdrop-filter: blur(12px); }
+.group:hover .group-hover\:translate-x-1 { transform: translateX(0.25rem); }
+.group:hover .group-hover\:bg-slate-800 { background-color: #1e293b; }
+
+/* Contact button hover states */
+.contact-btn:hover {
+  background-color: #0f172a !important;
+  color: #ffffff !important;
+  transform: translateY(-1px);
+}
+
+.contact-btn:hover .me-2 + svg {
+  transform: translateX(0.25rem);
+}
+
+/* Border utilities */
+.border-slate-200 { border-color: #e2e8f0; }
+.border-slate-900 { border-color: #0f172a; }
+
+/* Additional spacing */
+.gap-4 { gap: 1rem; }
+.rounded-pill { border-radius: 50rem; }
+
+/* Z-index layers */
+.z-40 { z-index: 1040; }
+.z-50 { z-index: 1050; }
 
 /* Utility classes needed for the component */
 /* Add these utility classes to your existing CSS */

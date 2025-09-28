@@ -6,7 +6,7 @@ import { useGSAP } from "@gsap/react";
 function Nav() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeLink, setActiveLink] = useState('/');
+  const [activeLink, setActiveLink] = useState(window.location.pathname);
   
   const navRef = useRef();
   const logoRef = useRef();
@@ -21,6 +21,21 @@ function Nav() {
     { href: "/services", label: "Services" },
     { href: "/owners", label: "Owners" }
   ];
+
+  // Detect URL changes and update active link
+  useEffect(() => {
+    const updateActiveLink = () => {
+      setActiveLink(window.location.pathname);
+    };
+
+    // Update on initial load
+    updateActiveLink();
+
+    // Listen for URL changes (back/forward browser buttons)
+    window.addEventListener('popstate', updateActiveLink);
+    
+    return () => window.removeEventListener('popstate', updateActiveLink);
+  }, []);
 
   // Scroll detection for nav state
   useEffect(() => {
@@ -82,9 +97,7 @@ function Nav() {
   };
 
   const handleLinkClick = (href) => {
-    setActiveLink(href);
     if (isOpen) setIsOpen(false);
-    // Actually navigate to the link
     window.location.href = href;
   };
 
@@ -96,14 +109,18 @@ function Nav() {
     <>
       <nav 
         ref={navRef}
-        className={`fixed-top z-50 transition-all duration-500 ease-out ${
-          isScrolled 
-            ? 'bg-white/95 backdrop-blur-md shadow-sm border-bottom border-slate-200' 
-            : 'bg-transparent'
-        }`}
+        className="position-fixed w-100"
         style={{ 
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 1050,
+          backgroundColor: isScrolled ? 'rgba(255, 255, 255, 0.95)' : 'transparent',
           backdropFilter: isScrolled ? 'blur(12px)' : 'none',
-          zIndex: 1050
+          WebkitBackdropFilter: isScrolled ? 'blur(12px)' : 'none',
+          boxShadow: isScrolled ? '0 1px 3px rgba(0, 0, 0, 0.1)' : 'none',
+          borderBottom: isScrolled ? '1px solid #e2e8f0' : 'none',
+          transition: 'all 0.5s ease-out'
         }}
       >
         <div className="container-fluid px-4 px-lg-5">
@@ -333,7 +350,8 @@ function Nav() {
                   className="mobile-link btn w-100 py-3 text-decoration-none fw-semibold"
                   style={{ 
                     border: '1px solid #dc2626',
-                    color: '#dc2626'
+                    color: '#dc2626',
+                    backgroundColor: 'transparent'
                   }}
                 >
                   Crisis Support: 1-800-273-8255
