@@ -1,175 +1,244 @@
-import React, { useEffect, useRef } from "react";
-import { Shield, ArrowRight } from "lucide-react";
+import React, { useRef, useLayoutEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {  ArrowRight, CheckCircle2 } from "lucide-react";
 import Img from "../Images/new_creek.jpg";
 
+gsap.registerPlugin(ScrollTrigger);
+
 function Insurance() {
+  const containerRef = useRef(null);
   const heroRef = useRef(null);
   const imageRef = useRef(null);
   const contentRef = useRef(null);
   const moduleRefs = useRef([]);
+  const calloutRef = useRef(null);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      // Hero entrance animation
+      gsap.fromTo(heroRef.current,
+        { opacity: 0, y: 40 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }
+      );
 
-    // Simple fade-in animations using CSS transitions
-    const animateElement = (element, delay, transform) => {
-      if (element) {
-        element.style.opacity = '0';
-        element.style.transform = transform;
-        setTimeout(() => {
-          element.style.transition = 'all 0.8s ease-out';
-          element.style.opacity = '1';
-          element.style.transform = 'translateY(0) translateX(0) scale(1)';
-        }, delay);
-      }
-    };
+      // Image reveal with sophisticated entrance
+      gsap.fromTo(imageRef.current,
+        { opacity: 0, scale: 1.1, rotationY: 8 },
+        { opacity: 1, scale: 1, rotationY: 0, duration: 1.2, delay: 0.3, ease: "power3.out" }
+      );
 
-    animateElement(heroRef.current, 100, 'translateY(20px)');
-    animateElement(imageRef.current, 400, 'scale(1.05)');
-    animateElement(contentRef.current, 600, 'translateX(30px)');
+      // Content stagger animation
+      gsap.fromTo(contentRef.current.children,
+        { opacity: 0, x: 60, rotationX: 15 },
+        { 
+          opacity: 1, 
+          x: 0, 
+          rotationX: 0,
+          duration: 0.7,
+          stagger: 0.15,
+          delay: 0.6,
+          ease: "power2.out"
+        }
+      );
 
-    // Animate module refs with stagger
-    moduleRefs.current.forEach((ref, index) => {
-      animateElement(ref, 800 + (index * 100), 'translateY(20px)');
-    });
+      // Module entrance with scroll trigger
+      moduleRefs.current.forEach((module, index) => {
+        gsap.fromTo(module,
+          { opacity: 0, y: 80, scale: 0.95 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: module,
+              start: "top 85%",
+              end: "bottom 15%",
+              toggleActions: "play none none reverse"
+            }
+          }
+        );
+      });
+
+      // Callout highlight animation
+      gsap.fromTo(calloutRef.current,
+        { opacity: 0, scale: 0.9, rotationZ: -2 },
+        {
+          opacity: 1,
+          scale: 1,
+          rotationZ: 0,
+          duration: 0.9,
+          ease: "back.out(1.2)",
+          scrollTrigger: {
+            trigger: calloutRef.current,
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+
+    }, containerRef);
+
+    return () => ctx.revert();
   }, []);
 
-  const addToRefs = (el) => {
+  const addToModuleRefs = (el) => {
     if (el && !moduleRefs.current.includes(el)) {
       moduleRefs.current.push(el);
     }
   };
 
-  const insuranceOptions = [
+  const insuranceData = [
+
     {
-      icon: 'T',
-      title: 'Tricare Prime & Select',
-      description: 'No referral required. Provide your benefits number when completing New Client Paperwork.'
+      category: "va",
+      icon: <CheckCircle2 className="w-5 h-5" />,
+      title: "Veterans Affairs",
+      description: "A referral is required from the VA prior to scheduling your appointment.",
+      badge: "Referral Required"
     },
-    {
-      icon: 'VA',
-      title: 'Veterans Affairs',
-      description: 'A referral is required from the VA prior to scheduling your appointment.'
-    },
-    {
-      icon: 'I',
-      title: 'Other Insurance',
-      description: 'Veterans with non-Tricare insurance, call our clinic to inquire about in-network benefits.'
-    },
-    {
-      icon: '$',
-      title: 'Private Pay',
-      description: 'Maximum confidentiality option. Pricing varies by clinician and session length.'
-    }
+
+
   ];
 
   return (
-    <div className="bg-slate-50 min-h-screen">
+    <div ref={containerRef} className="bg-slate-50 min-h-screen">
+      
       {/* Hero Module */}
-      <section 
-        ref={heroRef}
-        className="border-b border-slate-200 py-16 md:py-20"
-      >
+      <section className="py-16 md:py-20 border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center mb-4">
-            <Shield className="text-slate-700 mr-4 w-8 h-8 md:w-12 md:h-12" />
+          <div 
+            ref={heroRef}
+            className="flex items-center mb-4"
+          >
             <div>
-              <h1 className="text-4xl md:text-6xl font-semibold text-slate-900 mb-2 tracking-tight leading-tight">
-                Payment & Insurance Options
+            
+              <h1 className="text-6xl font-semibold text-slate-900 mb-2 tracking-tight lh-1 tomorrow">
+                Payment & Insurance
               </h1>
-              <p className="text-lg text-slate-600">
-                Comprehensive coverage for military families and veterans
+              <p className="text-xl text-slate-600">
+                Comprehensive coverage for active duty, military spouses and veterans
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Main Content Module */}
+      {/* Main Content Bento Layout */}
       <section className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid lg:grid-cols-12 gap-8 lg:gap-16">
             
-            {/* Image Column */}
+            {/* Image Module - Left Column */}
             <div className="lg:col-span-5">
               <div 
                 ref={imageRef}
-                className="relative overflow-hidden rounded-lg aspect-[4/3]"
+                className="sticky top-8"
               >
-                <img
-                  src={Img}
-                  alt="Calm, soothing water representing peace and healing"
-                  className="w-full h-full object-cover brightness-95 contrast-105"
-                />
+                <div className="relative overflow-hidden rounded-xl aspect-[4/3] shadow-xl">
+                  <img
+                    src={Img}
+                    alt="Calm, soothing water representing peace and healing"
+                    className="w-full h-full object-cover brightness-95 contrast-105"
+                  />
+                </div>
               </div>
             </div>
 
             {/* Content Column */}
-            <div className="lg:col-span-7" ref={contentRef}>
-              <div className="lg:pl-8">
+            <div className="lg:col-span-7">
+              <div ref={contentRef} className="lg:pl-8">
                 
                 {/* Active Duty Module */}
                 <div 
-                  ref={addToRefs}
-                  className="mb-12 pb-8 border-b border-slate-200 hover:-translate-y-1 transition-transform duration-300"
+                  ref={addToModuleRefs}
+                  className="mb-12 pb-8 border-b border-slate-200"
                 >
-                  <h2 className="text-3xl md:text-4xl font-semibold text-slate-900 mb-6 tracking-tight">
-                    Active Duty
-                  </h2>
-                  
-                  <div className="space-y-6">
-                    <div className="flex items-start">
-                      <div className="flex-shrink-0 bg-slate-900 text-white flex items-center justify-center w-8 h-8 rounded mr-4 text-sm font-semibold">
-                        T
+                  <div className="flex items-start mb-6">
+                    <div className="mr-4">
+                      <div className="bg-tricare text-white flex items-center justify-center w-12 h-12 rounded-lg">
+                        <span className="text-lg font-semibold">AD</span>
                       </div>
-                      <div>
-                        <h3 className="text-lg font-medium text-slate-900 mb-2">
-                          Tricare Coverage
-                        </h3>
-                        <p className="text-slate-600 max-w-prose leading-relaxed">
-                          Must have an active referral on file for counseling prior to scheduling your appointment.
-                        </p>
+                    </div>
+                    <div>
+                      <h2 className="text-5xl font-semibold text-slate-900 mb-2 tracking-tight tomorrow">
+                        Active Duty
+                      </h2>
+                      <p className="text-lg text-slate-600">
+                        Specialized support for active service members
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="p-6 bg-white rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow duration-300">
+                      <div className="flex items-start">
+                        <div>
+                          <h4 className="text-lg font-semibold text-slate-900 mb-2 tomorrow">
+                            Tricare Coverage
+                          </h4>
+                          <p className="text-md text-slate-600 lh-base">
+                            Must have an active referral on file for counseling prior to scheduling your appointment.
+                          </p>
+                        </div>
                       </div>
                     </div>
                     
-                    <div className="flex items-start">
-                      <div className="flex-shrink-0 bg-slate-900 text-white flex items-center justify-center w-8 h-8 rounded mr-4 text-sm font-semibold">
-                        $
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-medium text-slate-900 mb-2">
-                          Private Pay Options
-                        </h3>
-                        <p className="text-slate-600 max-w-prose leading-relaxed">
-                          Highest level of confidentiality available. Prices vary by clinician and session length.
-                        </p>
+                    <div className="p-6 bg-white rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow duration-300">
+                      <div className="flex items-start">
+                        <div>
+                          <h4 className="text-lg font-semibold text-slate-900 mb-2 tomorrow">
+                            Private Pay Options
+                          </h4>
+                          <p className="text-md text-slate-600 lh-base">
+                            Highest level of confidentiality available. Prices vary by clinician and session length.
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
 
                 {/* Veterans Module */}
-                <div 
-                  ref={addToRefs}
-                  className="mb-12 hover:-translate-y-1 transition-transform duration-300"
-                >
-                  <h2 className="text-3xl md:text-4xl font-semibold text-slate-900 mb-6 tracking-tight">
-                    Veterans & Dependents
-                  </h2>
+                <div ref={addToModuleRefs} className="mb-12">
+                  <div className="flex items-start mb-6">
+                    <div className="mr-4">
+                      <div className="bg-tricare text-white flex items-center justify-center w-12 h-12 rounded-lg">
+                        <span className="text-lg font-semibold">V</span>
+                      </div>
+                    </div>
+                    <div>
+                      <h2 className="text-5xl font-semibold text-slate-900 mb-2 tracking-tight tomorrow">
+                        Veterans & Dependents
+                      </h2>
+                      <p className="text-lg text-slate-600">
+                        Flexible coverage options for veteran families
+                      </p>
+                    </div>
+                  </div>
                   
-                  <div className="space-y-6">
-                    {insuranceOptions.map((item, index) => (
-                      <div key={index} className="flex items-start">
-                        <div className="flex-shrink-0 bg-slate-900 text-white flex items-center justify-center w-8 h-8 rounded mr-4 text-sm font-semibold">
-                          {item.icon}
-                        </div>
-                        <div>
-                          <h3 className="text-lg font-medium text-slate-900 mb-2">
-                            {item.title}
-                          </h3>
-                          <p className="text-slate-600 max-w-prose leading-relaxed">
-                            {item.description}
-                          </p>
+                  <div className="space-y-4">
+                    {insuranceData.map((item, index) => (
+                      <div key={index} className="p-6 bg-white rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition-all duration-300 hover:-translate-y-1">
+                        <div className="flex items-start">
+                          <div className="bg-slate-100 text-slate-700 flex items-center justify-center w-10 h-10 rounded-lg mr-4 flex-shrink-0">
+                            {item.icon}
+                          </div>
+                          <div className="flex-1">
+                            <div className="flex items-center mb-2">
+                              <h4 className="text-lg font-semibold text-slate-900 mr-3 tomorrow">
+                                {item.title}
+                              </h4>
+                              <span className="bg-slate-100 text-slate-700 text-caption px-3 py-1 rounded-full">
+                                {item.badge}
+                              </span>
+                            </div>
+                            <p className="text-md text-slate-600 lh-base">
+                              {item.description}
+                            </p>
+                          </div>
                         </div>
                       </div>
                     ))}
@@ -178,21 +247,30 @@ function Insurance() {
 
                 {/* Care Connect Callout Module */}
                 <div 
-                  ref={addToRefs}
-                  className="bg-slate-100 border-l-4 border-slate-700 p-6 rounded-lg mt-12"
+                  ref={calloutRef}
+                  className="p-6 rounded-xl relative overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200 border-l-4 border-tricare"
                 >
                   <div className="flex items-start">
-                    <ArrowRight className="text-slate-700 mr-4 mt-1 flex-shrink-0 w-5 h-5" />
+                    <ArrowRight className="text-slate-700 mt-1 mr-4 flex-shrink-0" size={24} />
                     <div>
-                      <h4 className="text-lg font-medium text-slate-900 mb-3">
+                      <h4 className="text-2xl font-semibold text-slate-900 mb-3 tomorrow">
                         Quick Referral for Active Duty
                       </h4>
-                      <p className="text-slate-700 leading-relaxed">
-                        Can't see your PCM quickly? Active Duty personnel can visit the Care Connect station at the Behavioral Health Department (Building 3, NMCP) to meet with a Behavioral Health Technician for mental health counseling referrals. Open Monday-Friday, 8:30-10:30 AM. After referral creation, call Tricare to update provider to The Lemich Clinic.
+                      <p className="text-md text-slate-700 mb-4 lh-base max-width-readable">
+                        Can't see your PCM quickly? Active Duty personnel can visit the Care Connect station at the Behavioral Health Department (Building 3, NMCP) to meet with a Behavioral Health Technician for mental health counseling referrals.
+                      </p>
+                      <div className="flex items-center text-sm text-slate-600 mb-2">
+                        <span className="font-semibold">
+                          Open Monday-Friday, 8:30-10:30 AM
+                        </span>
+                      </div>
+                      <p className="text-sm text-slate-600">
+                        After referral creation, call Tricare to update provider to The Lemich Clinic.
                       </p>
                     </div>
                   </div>
                 </div>
+
               </div>
             </div>
           </div>

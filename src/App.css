@@ -21,6 +21,41 @@
   color: #b5cde7;
 }
 
+.max-width-readable {
+  max-width: 65ch;
+}
+
+.tracking-wider {
+  letter-spacing: 0.05em;
+}
+
+/* Utility classes needed for the component */
+/* Add these utility classes to your existing CSS */
+.tracking-tight { letter-spacing: -0.025em; }
+.border-tricare { border-color: hsla(158, 48%, 18%); }
+.min-vh-75 { min-height: 75vh; }
+.lh-relaxed { line-height: 1.625; }
+
+/* Add these Bootstrap utility extensions */
+.fw-semibold { font-weight: 600; }
+.border-tricare { border-color: hsla(158, 48%, 18%) !important; }
+.border-slate-200 { border-color: #e2e8f0 !important; }
+.border-slate-700 { border-color: #334155 !important; }
+.object-fit-cover { object-fit: cover; }
+
+/* Font weight classes for Bootstrap compatibility */
+.font-weight-semibold { font-weight: 600; }
+.font-weight-bold { font-weight: 700; }
+.font-weight-medium { font-weight: 500; }
+
+.lh-1 {
+  line-height: 1.1;
+}
+
+.lh-base {
+  line-height: 1.6;
+}
+
 .mission-accent-line {
   height: 4px;
   width: 0%;

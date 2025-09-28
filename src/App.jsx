@@ -6,8 +6,8 @@ import WebRoutes from './WebRoutes'
 function App() {
   return (
     <>
-      <NavBanner/>
       <Nav/>
+      <NavBanner/>
       <WebRoutes/>
     </>
   )
