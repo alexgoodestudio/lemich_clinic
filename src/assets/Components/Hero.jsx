@@ -10,9 +10,7 @@ function Hero() {
   const baseImageRef = useRef(null);
   const currentImageRef = useRef(0);
   const [openIndex, setOpenIndex] = useState(null);
-  const [hoverIndex, setHoverIndex] = useState(null);
   const serviceRefs = useRef([]);
-  const textRefs = useRef([]);
 
   const services = [
     {
@@ -65,41 +63,12 @@ function Hero() {
     return () => clearInterval(interval);
   }, []);
 
-  // GSAP hover animations
-  const handleMouseEnter = (index) => {
-    setHoverIndex(index);
-    
-    const textElement = textRefs.current[index];
-    if (textElement && window.innerWidth >= 768) { // md breakpoint
-      gsap.to(textElement, {
-        height: "auto",
-        opacity: 1,
-        duration: 0.4,
-        ease: "power2.out"
-      });
-    }
-  };
-
-  const handleMouseLeave = (index) => {
-    setHoverIndex(null);
-    
-    const textElement = textRefs.current[index];
-    if (textElement && window.innerWidth >= 768) { // md breakpoint
-      gsap.to(textElement, {
-        height: 0,
-        opacity: 0,
-        duration: 0.3,
-        ease: "power2.in"
-      });
-    }
-  };
-
   const toggle = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
-    <div className="">
+    <div className="mt-5">
       <div className="row "></div>
       <div className="d-flex align-items-center">
         <div className="row ">
@@ -170,36 +139,20 @@ function Hero() {
                 ref={(el) => (serviceRefs.current[index] = el)}
                 className="border-b border-b-gray-300 py-3 cursor-pointer"
                 onClick={() => toggle(index)}
-                onMouseEnter={() => handleMouseEnter(index)}
-                onMouseLeave={() => handleMouseLeave(index)}
               >
                 <div className="flex justify-between items-center">
                   <p className="font-semibold mb-0">{service.title}</p>
                   <span className="text-xl">
-                    {hoverIndex === index || openIndex === index ? "−" : "+"}
+                    {openIndex === index ? "−" : "+"}
                   </span>
                 </div>
 
-                {/* Mobile expand (click) */}
-                <div className="md:hidden">
-                  {openIndex === index && (
-                    <div className="mt-2 text-gray-600 text-sm">
-                      {service.text}
-                    </div>
-                  )}
-                </div>
-
-                {/* Desktop expand (hover with GSAP) */}
-                <div
-                  ref={(el) => (textRefs.current[index] = el)}
-                  className="hidden md:block overflow-hidden text-gray-600 text-sm mt-2"
-                  style={{
-                    height: 0,
-                    opacity: 0,
-                  }}
-                >
-                  {service.text}
-                </div>
+                {/* Expanded content on click */}
+                {openIndex === index && (
+                  <div className="mt-2 text-gray-600 text-sm">
+                    {service.text}
+                  </div>
+                )}
               </div>
             ))}
           </div>

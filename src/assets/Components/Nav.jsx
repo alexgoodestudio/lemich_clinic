@@ -109,7 +109,7 @@ function Nav() {
     <>
       <nav 
         ref={navRef}
-        className="position-fixed w-100"
+        className="position-fixed w-100 "
         style={{ 
           top: 0,
           left: 0,
@@ -123,8 +123,8 @@ function Nav() {
           transition: 'all 0.5s ease-out'
         }}
       >
-                <div className="bg-slate-200 text-slate-900 text-sm text-center p-2">
-            <p className="mb-0">Dedicated to the Mental Health of Norfolk's Military Community <a href="/services" className="underline font-semibold"> Learn More</a></p>
+        <div className="bg-slate-200 text-slate-900 text-sm text-center p-2">
+          <p className="mb-0">Dedicated to the Mental Health of Norfolk's Military Community <a href="/services" className="underline font-semibold"> Learn More</a></p>
         </div>
         <div className="container-fluid px-4 px-lg-5">
           <div className="row align-items-center py-3">
@@ -211,12 +211,12 @@ function Nav() {
               </div>
             </div>
 
-            {/* CTA Buttons - Far Right */}
-            <div className="col-auto">
+            {/* Desktop CTA Buttons - Hidden on mobile */}
+            <div className="col-auto d-none d-lg-flex">
               <div ref={ctaRef} className="d-flex align-items-center gap-3">
                 
                 {/* Contact Button - Desktop */}
-                <div className="d-none d-md-block">
+                <div>
                   <a
                     href="/contact"
                     className="btn text-decoration-none fw-semibold d-inline-flex align-items-center contact-btn"
@@ -239,7 +239,7 @@ function Nav() {
                 </div>
 
                 {/* Emergency Contact */}
-                <div className="d-none d-lg-block">
+                <div>
                   <a
                     href="tel:1-800-273-8255"
                     className="btn text-white text-decoration-none fw-semibold"
@@ -255,17 +255,19 @@ function Nav() {
                     Crisis Line
                   </a>
                 </div>
-
-                {/* Mobile Menu Toggle */}
-                <button
-                  className="btn btn-link d-lg-none p-2 text-decoration-none"
-                  style={{ color: '#0f172a' }}
-                  onClick={toggleMobileMenu}
-                  aria-label="Toggle navigation menu"
-                >
-                  {isOpen ? <X size={24} /> : <Menu size={24} />}
-                </button>
               </div>
+            </div>
+
+            {/* Mobile Menu Toggle - Far Right on Mobile Only */}
+            <div className="col-auto d-lg-none ms-auto">
+              <button
+                className="btn btn-link p-2 text-decoration-none"
+                style={{ color: '#0f172a' }}
+                onClick={toggleMobileMenu}
+                aria-label="Toggle navigation menu"
+              >
+                {isOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
             </div>
 
           </div>
