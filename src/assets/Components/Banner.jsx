@@ -11,46 +11,55 @@ const MOTION = {
 };
 
 function Banner() {
-  const marqueeRef = useRef(null);
-  const textRef = useRef(null);
+  const containerRef = useRef(null);
+  const trackRef = useRef(null);
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  const message = "Request confidential mental health support today";
+  const location = "Located in Norfolk, Virginia";
+
   useGSAP(() => {
-    const text = textRef.current;
-    if (!text) return;
-
-    const textWidth = text.offsetWidth;
-    const containerWidth = marqueeRef.current.offsetWidth;
-
-    if (prefersReducedMotion) {
-      gsap.set(text, { x: 0 });
+    if (!trackRef.current || prefersReducedMotion) {
+      gsap.set(trackRef.current, { x: 0 });
       return;
     }
 
-    gsap.fromTo(text,
-      { x: containerWidth / 2 },
-      { 
-        x: -textWidth,
-        duration: 34,
-        ease: 'none',
-        repeat: -1
+    const track = trackRef.current;
+    const trackWidth = track.scrollWidth / 2;
+
+    gsap.to(track, {
+      x: -trackWidth,
+      duration: 40,
+      ease: 'none',
+      repeat: -1,
+      modifiers: {
+        x: gsap.utils.unitize(x => parseFloat(x) % trackWidth)
       }
-    );
-  }, { scope: marqueeRef });
+    });
+  }, { scope: containerRef });
+
+  const content = Array(8).fill(null).map((_, i) => (
+    <span key={i} className="inline-flex items-center">
+      <span>{message}</span>
+      <span className="mx-8 text-slate-500" aria-hidden="true">•</span>
+      <span>{location}</span>
+      <span className="mx-8 text-slate-500" aria-hidden="true">•</span>
+    </span>
+  ));
 
   return (
     <div 
-      ref={marqueeRef}
-      className="overflow-hidden bg-slate-300 whitespace-nowrap relative w-full marquee-container"
+      ref={containerRef}
+      className="overflow-hidden bg-slate-100 py-4"
       role="marquee"
       aria-live="off"
     >
-      <h2 
-        ref={textRef}
-        className="text-5xl font-extrabold text-slate-800 marquee-text"
+      <div 
+        ref={trackRef}
+        className="flex whitespace-nowrap text-3xl font-semibold text-slate-900"
       >
-        Request confidential mental health support today <span className="mx-3" aria-hidden="true">•</span> Located in Norfolk, Virginia <span className="mx-3" aria-hidden="true">•</span> Request confidential mental health support today <span className="mx-3" aria-hidden="true">•</span> Located in Norfolk, Virginia <span className="mx-3" aria-hidden="true">•</span> Request confidential mental health support today <span className="mx-3" aria-hidden="true">•</span> Located in Norfolk, Virginia <span className="mx-3" aria-hidden="true">•</span> Request confidential mental health support today <span className="mx-3" aria-hidden="true">•</span> Located in Norfolk, Virginia <span className="mx-3" aria-hidden="true">•</span>
-      </h2>
+        {content}
+      </div>
     </div>
   );
 }

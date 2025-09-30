@@ -20,6 +20,15 @@
 .light-blue {
   color: #b5cde7;
 }
+.overflow-hidden {
+  will-change: transform;
+}
+
+/* Ensure smooth rendering */
+[role="marquee"] > div {
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
 
 .max-width-readable {
   max-width: 65ch;
