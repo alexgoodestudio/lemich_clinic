@@ -129,19 +129,20 @@ function Nav() {
         <div className="container-fluid px-4 px-lg-5">
           <div className="row align-items-center py-3">
             
-            {/* Logo Section - Far Left */}
-            <div className="col-auto">
+            {/* Logo Section - Flexible on mobile, auto on desktop */}
+            <div className="col col-lg-auto" style={{ minWidth: 0 }}>
               <div ref={logoRef}>
                 <a
                   href="/"
                   className="d-inline-flex align-items-center text-decoration-none group"
+                  style={{ maxWidth: '100%' }}
                   onClick={(e) => {
                     e.preventDefault();
                     handleLinkClick('/');
                   }}
                 >
                   <div 
-                    className="bg-slate-900 text-white px-3 py-2 me-2 transition-all duration-300"
+                    className="bg-slate-900 text-white px-3 py-2 me-2 transition-all duration-300 flex-shrink-0"
                     style={{ 
                       backgroundColor: '#0f172a',
                       transition: 'all 0.3s ease'
@@ -151,11 +152,11 @@ function Nav() {
                   >
                     <span className="text-sm fw-bold" style={{ letterSpacing: '-0.025em' }}>TLC</span>
                   </div>
-                  <div>
-                    <span className="text-slate-900 fw-semibold d-block lh-1" style={{ fontSize: '1rem', color: '#0f172a' }}>
+                  <div style={{ minWidth: 0 }}>
+                    <span className="text-slate-900 fw-semibold d-block lh-1" style={{ fontSize: '1rem', color: '#0f172a', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                       The Lemich Clinic
                     </span>
-                    <span className="text-slate-600 d-block lh-1 mt-1" style={{ fontSize: '0.75rem', color: '#64748b' }}>
+                    <span className="text-slate-600 d-block lh-1 mt-1" style={{ fontSize: '0.75rem', color: '#64748b', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                       Military Mental Health
                     </span>
                   </div>
@@ -172,7 +173,7 @@ function Nav() {
               >
                 <ul className="d-flex align-items-center gap-4 mb-0 list-unstyled">
                   {navLinks.map((link) => (
-                    <li key={link.href} className="nav-item">
+                    <li key={link.href} className="nav-item ">
                       <a
                         href={link.href}
                         className={`nav-link text-decoration-none px-3 py-2 rounded-pill transition-all duration-300 fw-medium ${
@@ -259,7 +260,7 @@ function Nav() {
             </div>
 
             {/* Mobile Menu Toggle - Far Right on Mobile Only */}
-            <div className="col-auto d-lg-none ms-auto">
+            <div className="col-auto d-lg-none">
               <button
                 className="btn btn-link p-2 text-decoration-none"
                 style={{ color: '#0f172a' }}
@@ -299,7 +300,7 @@ function Nav() {
             <div className="px-4">
               
               {/* Mobile Navigation Links */}
-              <div className="mb-5">
+              <div className="mb-5 mt-5">
                 <ul className="list-unstyled mb-0">
                   {navLinks.map((link) => (
                     <li key={link.href} className="mb-1">
