@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import armbruster from "./staffimages/armbruster.avif";
 import casey from "./staffimages/casey.avif";
 import garner from "./staffimages/garner-min.jpeg";
@@ -50,6 +50,41 @@ function Team() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const observerRef = useRef(null);
+
+  useEffect(() => {
+    const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+    
+    if (!isTouchDevice) return;
+
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+          } else {
+            entry.target.classList.remove('in-view');
+          }
+        });
+      },
+      {
+        threshold: 0.3,
+        rootMargin: '-50px'
+      }
+    );
+
+    const zoomElements = document.querySelectorAll('.zoom');
+    zoomElements.forEach((el) => {
+      observerRef.current.observe(el);
+    });
+
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
+    };
+  }, []);
   
   const team = [
     {
@@ -92,7 +127,7 @@ function Team() {
       name: "Sarah Rieke, MSeD, Resident in Counseling (VA)",
       role: "Clinician",
       description:
-        "Sarah holds a Masters in Mental Health Counseling from Old Dominion University and a Bachelor’s Degree in Psychology from Liberty University. She has counseled at Chesapeake Regional Medical Center in both inpatient and outpatient settings, including providing mental health support services to the hospital staff. She has a wide range of clinical experience to include depression, anxiety, relationship difficulties, postpartum concerns, grief and loss, trauma, and coping with life transitions. Sarah fosters a warm, trusting therapeutic relationship with her clients to help facilitate their personal mental health and wellness goals.",
+        "Sarah holds a Masters in Mental Health Counseling from Old Dominion University and a Bachelor's Degree in Psychology from Liberty University. She has counseled at Chesapeake Regional Medical Center in both inpatient and outpatient settings, including providing mental health support services to the hospital staff. She has a wide range of clinical experience to include depression, anxiety, relationship difficulties, postpartum concerns, grief and loss, trauma, and coping with life transitions. Sarah fosters a warm, trusting therapeutic relationship with her clients to help facilitate their personal mental health and wellness goals.",
       lastName: "reike",
       specialties: "EMDR",
       availability: "In-Person and Telehealth",
@@ -101,7 +136,7 @@ function Team() {
       name: "Kiana Dabier Moghaddam, MSeD, Resident in Counseling (VA)",
       role: "Clinician",
       description:
-        "Kiana holds a Masters in Mental Health Counseling from Old Dominion University and has a Bachelor’s Degree in Public Health. She counseled at Sunrise Counseling and worked as a Case Manager and Victim Advocate at Samaritan House. Kiana has extensive experience in refugee and immigrant resettlement challenges, human trafficking, domestic violence, sexual assault, and addiction. As a bicultural counselor and a Marine Corps spouse, she is fiercely committed to creating an environment of acceptance, collaboration, empowerment, and growth.",
+        "Kiana holds a Masters in Mental Health Counseling from Old Dominion University and has a Bachelor's Degree in Public Health. She counseled at Sunrise Counseling and worked as a Case Manager and Victim Advocate at Samaritan House. Kiana has extensive experience in refugee and immigrant resettlement challenges, human trafficking, domestic violence, sexual assault, and addiction. As a bicultural counselor and a Marine Corps spouse, she is fiercely committed to creating an environment of acceptance, collaboration, empowerment, and growth.",
       lastName: "moghaddam",
       specialties: "EMDR",
       availability: "Telehealth",
@@ -110,7 +145,7 @@ function Team() {
       name: "Elena Little, MSeD, Resident in Counseling (VA)",
       role: "Clinician",
       description:
-        "Elena holds a Masters in Mental Health Counseling from Old Dominion University and has a bachelor’s degree in Psychology. She has provided counseling services at Virginia Beach Psychiatric Center’s inpatient and partial hospitalization programs. She has focused on substance abuse, psycho-educational, dual diagnose, trauma-informed care, and mood disorders. She supports those seeking help to with new tools to combat stressors, understand themselves deeper, and live more meaningful lives.",
+        "Elena holds a Masters in Mental Health Counseling from Old Dominion University and has a bachelor's degree in Psychology. She has provided counseling services at Virginia Beach Psychiatric Center's inpatient and partial hospitalization programs. She has focused on substance abuse, psycho-educational, dual diagnose, trauma-informed care, and mood disorders. She supports those seeking help to with new tools to combat stressors, understand themselves deeper, and live more meaningful lives.",
       lastName: "little",
       specialties: "EMDR",
       availability: "In-Person and Telehealth",
@@ -128,7 +163,7 @@ function Team() {
       name: "Ashley Casey, MSeD, Resident in Counseling (VA)",
       role: "Clinician",
       description:
-        "Ashley holds a Masters in Mental Health Counseling from Old Dominion University and has a bachelor’s degree in Geography. She has provided counseling services at the LGBT Life Center, Chesapeake Regional Healthcare, and has worked in private practice. Her clinical experience includes working with LGBT+ clients, exploring relationship and attachment issues, anxiety, depression, gender dysphoria, and alcohol use disorder. As a veteran and military spouse herself, Ashley has a passion for working with military clients and their families. She seeks to meet clients where they're at, and strives to provide a warm and accepting environment for all.",
+        "Ashley holds a Masters in Mental Health Counseling from Old Dominion University and has a bachelor's degree in Geography. She has provided counseling services at the LGBT Life Center, Chesapeake Regional Healthcare, and has worked in private practice. Her clinical experience includes working with LGBT+ clients, exploring relationship and attachment issues, anxiety, depression, gender dysphoria, and alcohol use disorder. As a veteran and military spouse herself, Ashley has a passion for working with military clients and their families. She seeks to meet clients where they're at, and strives to provide a warm and accepting environment for all.",
       lastName: "casey",
       specialties: "ACT",
       availability: "In-Person and Telehealth",
@@ -137,7 +172,7 @@ function Team() {
       name: "Hayli Stone, MSeD, Resident in Counseling (VA)",
       role: "Clinician",
       description:
-        "Hayli holds a Masters Degree in Mental Health Counseling from Old Dominion University and holds a Bachelor’s Degree in Liberal Studies from SUNY Purchase. She has provided counseling services at Chesapeake Regional Hospital and Grassfield Primary Care Clinic. Her clinical experience includes anxiety, depression, trauma, relationship difficulties and LGBTQ affirming care. She is committed to providing a warm and nonjudgmental environment in which clients are able to feel heard and supported as they work towards their personal goals.",
+        "Hayli holds a Masters Degree in Mental Health Counseling from Old Dominion University and holds a Bachelor's Degree in Liberal Studies from SUNY Purchase. She has provided counseling services at Chesapeake Regional Hospital and Grassfield Primary Care Clinic. Her clinical experience includes anxiety, depression, trauma, relationship difficulties and LGBTQ affirming care. She is committed to providing a warm and nonjudgmental environment in which clients are able to feel heard and supported as they work towards their personal goals.",
       lastName: "stone",
       specialties: "EMDR",
       availability: "In-Person and Telehealth",
@@ -155,7 +190,7 @@ function Team() {
       name: "Amanda Henderson, MSeD, Resident in Counseling (VA)",
       role: "Clinician",
       description:
-        "Amanda holds a Masters in Mental Health Counseling at ODU, and currently holds a B.S. in psychology and human services. As both a Navy veteran and military spouse, she has extensive knowledge and experience surrounding military issues and culture. Amanda has served as a career counselor and sexual assault victim advocate during her time in the military; she also has experience with domestic violence issues from her time working at a women’s shelter. Utilizing an eclectic counseling approach, she collaborates closely with clients to achieve their goals, fostering a nurturing environment that supports healing and personal growth.",
+        "Amanda holds a Masters in Mental Health Counseling at ODU, and currently holds a B.S. in psychology and human services. As both a Navy veteran and military spouse, she has extensive knowledge and experience surrounding military issues and culture. Amanda has served as a career counselor and sexual assault victim advocate during her time in the military; she also has experience with domestic violence issues from her time working at a women's shelter. Utilizing an eclectic counseling approach, she collaborates closely with clients to achieve their goals, fostering a nurturing environment that supports healing and personal growth.",
       lastName: "henderson",
       specialties: "",
       availability: "In-Person and Telehealth",

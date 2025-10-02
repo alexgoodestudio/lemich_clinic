@@ -24,6 +24,127 @@
   will-change: transform;
 }
 
+/* =================================
+   BLOG COMPONENT STYLES
+   ================================= */
+
+/* Blog Post Cards */
+.blog-post-card {
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.blog-post-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+  border-color: #cbd5e1;
+}
+
+/* Blog Title Link */
+.blog-title-link {
+  transition: color 0.3s ease;
+}
+
+.blog-title-link:hover {
+  color: #475569 !important;
+}
+
+/* Read More Link */
+.blog-read-more {
+  transition: all 0.3s ease;
+}
+
+.blog-read-more:hover {
+  color: #475569 !important;
+}
+
+.blog-read-more .blog-arrow {
+  transition: transform 0.3s ease;
+}
+
+.blog-read-more:hover .blog-arrow {
+  transform: translateX(4px);
+}
+
+/* Breadcrumb Links */
+.blog-breadcrumb-link {
+  transition: color 0.3s ease;
+}
+
+.blog-breadcrumb-link:hover {
+  color: #0f172a !important;
+}
+
+/* Back Link */
+.blog-back-link {
+  transition: color 0.3s ease;
+}
+
+.blog-back-link:hover {
+  color: #0f172a !important;
+}
+
+/* CTA Button */
+.blog-cta-button {
+  background-color: #0f172a;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.blog-cta-button:hover {
+  background-color: #1e293b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2);
+}
+
+/* =================================
+   BLOG POST CONTENT STYLES
+   ================================= */
+
+.blog-post-content h2 {
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+.blog-post-content h3 {
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.blog-post-content p {
+  margin-bottom: 1.25rem;
+}
+
+.blog-post-content ul,
+.blog-post-content ol {
+  margin-bottom: 1.5rem;
+}
+
+.blog-post-content li {
+  margin-bottom: 0.5rem;
+}
+
+.blog-post-content strong {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.blog-post-content a {
+  color: #0066cc;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.blog-post-content a:hover {
+  color: #0052a3;
+  text-decoration: underline;
+}
+
+/* Footer Border */
+.blog-post-footer {
+  border-top: 1px solid #e2e8f0;
+}
+
 /* Ensure smooth rendering */
 [role="marquee"] > div {
   backface-visibility: hidden;
