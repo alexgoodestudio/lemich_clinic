@@ -14,13 +14,14 @@ function Nav() {
   const ctaRef = useRef();
   const mobileMenuRef = useRef();
 
-  const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/insurance", label: "Insurance" },
-    { href: "/team", label: "Team" },
-    { href: "/services", label: "Services" },
-    { href: "/owners", label: "Owners" }
-  ];
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/insurance", label: "Insurance" },
+  { href: "/team", label: "Team" },
+  { href: "/services", label: "Services" },
+  { href: "/owners", label: "Owners" },
+  { href: "/blog", label: "Blog" }  // ← New blog link added
+];
 
   // Detect URL changes and update active link
   useEffect(() => {
