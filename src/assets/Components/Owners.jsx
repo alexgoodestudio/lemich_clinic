@@ -40,7 +40,7 @@ function Owners() {
           name="description"
           content="Meet the founders of The Lemich Clinic: Gregory and Jennifer Lemich, experts in mental health services for veterans and military personnel in Norfolk, VA."
         />
-        <title>Meet The Owners | The Lemich Clinic | Norfolk, VA</title>
+        <title>Meet The Owners • The Lemich Clinic • Norfolk, VA</title>
       </Helmet>
       <div className="container-fluid">
         <div className="row justify-content-center align-items-center min-vh-100 g-0">

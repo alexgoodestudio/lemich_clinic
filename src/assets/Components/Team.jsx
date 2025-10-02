@@ -228,7 +228,7 @@ function Team() {
   return (
     <div className="bg-slate-50 py-12">
       <Helmet>
-  <title>Meet The Team | The Lemich Clinic | Norfolk, VA | Military Mental Health Services</title>
+  <title>Meet The Team • The Lemich Clinic • Norfolk, VA | Military Mental Health Services</title>
   <meta
     name="description"
     content="Meet the team at The Lemich Clinic. Experts in mental health services for veterans and military personnel in Norfolk, and Virginia Beach VA."

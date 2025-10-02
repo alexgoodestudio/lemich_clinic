@@ -17,7 +17,7 @@ function Services() {
           content="The Lemich Clinic | Mental health services for veterans and active duty military in Norfolk, VA."
         />
         <title>
-          Exclusive Services | Norfolk, VA | Military Mental Health Services
+          Exclusive Services • Norfolk, VA • Military Mental Health Services
         </title>
       </Helmet>
 

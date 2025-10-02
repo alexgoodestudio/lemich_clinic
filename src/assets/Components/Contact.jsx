@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import { gsap } from "gsap";
+import { Helmet } from 'react-helmet-async';
 import { useGSAP } from "@gsap/react";
 
 function Contact() {
@@ -63,6 +64,13 @@ function Contact() {
 
   return (
     <div className="bg-stone-50 min-h-screen py-5" ref={containerRef}>
+                  <Helmet>
+              <meta
+                name="description"
+                content="Contact us at The Lemich Clinic | Experts in mental health services for veterans and military personnel in Norfolk, VA."
+              />
+              <title> Contact Us | Norfolk, VA | Military Mental Health Services</title>
+            </Helmet>
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-12 col-lg-10">

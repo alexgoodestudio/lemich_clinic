@@ -111,7 +111,7 @@ function Insurance() {
                       name="description"
                       content="Payment and Insurance Options at The Lemich Clinic | Tricare | Experts in mental health services for veterans and active duty military in Norfolk, VA."
                     />
-                    <title> Payment and Insurance Options | Norfolk, VA | Tricare Accepted | Military Mental Health Services</title>
+                    <title> Payment and Insurance Options • Norfolk, VA • Tricare Accepted | Military Mental Health Services</title>
                   </Helmet>
       {/* Hero Module */}
       <section className="py-16 md:py-20 border-b border-slate-200">
