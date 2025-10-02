@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import img1 from "../Images/1.avif";
 import img2 from "../Images/2.avif";
 import img3 from "../Images/3.avif";
@@ -10,7 +11,15 @@ function Services() {
     });
   return (
     <div className="d-flex flex-column bg-slate-50">
-
+      <Helmet>
+        <meta
+          name="description"
+          content="The Lemich Clinic | Mental health services for veterans and active duty military in Norfolk, VA."
+        />
+        <title>
+          Exclusive Services | Norfolk, VA | Military Mental Health Services
+        </title>
+      </Helmet>
 
       <div className="container py-5 flex-grow-1">
         <div className="row mb-3">

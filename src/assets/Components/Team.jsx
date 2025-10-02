@@ -1,4 +1,4 @@
-import React from "react";
+import { Helmet } from 'react-helmet-async';
 import { useEffect } from "react";
 import armbruster from "./staffimages/armbruster.avif";
 import casey from "./staffimages/casey.avif";
@@ -227,6 +227,13 @@ function Team() {
 
   return (
     <div className="bg-slate-50 py-12">
+      <Helmet>
+  <title>Meet The Team | The Lemich Clinic | Norfolk, VA | Military Mental Health Services</title>
+  <meta
+    name="description"
+    content="Meet the team at The Lemich Clinic. Experts in mental health services for veterans and military personnel in Norfolk, and Virginia Beach VA."
+  />
+</Helmet>
 
       <div className="container mx-auto ">
       <h1 className=" text-4xl barlow text-start mb-1">

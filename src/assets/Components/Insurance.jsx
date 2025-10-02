@@ -1,4 +1,5 @@
 import React, { useRef, useLayoutEffect } from "react";
+import { Helmet } from 'react-helmet-async';
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {  ArrowRight, CheckCircle2 } from "lucide-react";
@@ -105,7 +106,13 @@ function Insurance() {
 
   return (
     <div ref={containerRef} className="bg-slate-50 min-h-screen">
-      
+                        <Helmet>
+                    <meta
+                      name="description"
+                      content="Payment and Insurance Options at The Lemich Clinic | Tricare | Experts in mental health services for veterans and active duty military in Norfolk, VA."
+                    />
+                    <title> Payment and Insurance Options | Norfolk, VA | Tricare Accepted | Military Mental Health Services</title>
+                  </Helmet>
       {/* Hero Module */}
       <section className="py-16 md:py-20 border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4">

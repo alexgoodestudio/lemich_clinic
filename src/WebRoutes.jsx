@@ -1,22 +1,24 @@
-
 import { Routes, Route} from "react-router-dom";
+import { HelmetProvider } from 'react-helmet-async';
 import Home from "./assets/Components/Home";
 import Team from "./assets/Components/Team";
 import Services from "./assets/Components/Services";
 import Owners from "./assets/Components/Owners";
 import Contact from "./assets/Components/Contact";
 import Insurance from "./assets/Components/Insurance";
-function WebRoutes() {
 
+function WebRoutes() {
   return (
-    <Routes>
+    <HelmetProvider>
+      <Routes>
         <Route path="/team" element={<Team />}/>
         <Route path="/services" element={<Services />}/>
         <Route path="*" element={<Home />}/>
         <Route path="/owners" element={<Owners />}/>
         <Route path="/contact" element={<Contact />}/>
         <Route path="/insurance" element={<Insurance />}/>
-    </Routes>
+      </Routes>
+    </HelmetProvider>
   );  
 }
 
