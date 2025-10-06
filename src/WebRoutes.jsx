@@ -18,8 +18,6 @@ function WebRoutes() {
         <Route path="/owners" element={<Owners />}/>
         <Route path="/contact" element={<Contact />}/>
         <Route path="/insurance" element={<Insurance />}/>
-        
-        {/* Blog routes */}
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
         
