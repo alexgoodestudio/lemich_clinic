@@ -2,6 +2,16 @@
 @import "tailwindcss";
 @tailwind utilities;
 
+
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+body {
+  overflow-x: hidden;
+}
+
 @font-face {
   font-family: "Tomorrow";
   src: url("/Fonts/Tomorrow-Medium.ttf") format("woff2");
