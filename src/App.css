@@ -35,7 +35,11 @@ body {
 }
 
 
-
+/* All styling handled by Tailwind - no custom CSS needed */
+/* Optional: Add smooth height transition for accordion if desired */
+.accordion-content {
+  transition: max-height 0.3s ease-out;
+}
 /* =================================
    BLOG POST CONTENT STYLES
    ================================= */

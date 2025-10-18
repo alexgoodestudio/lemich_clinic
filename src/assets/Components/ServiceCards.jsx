@@ -1,109 +1,177 @@
-import React, { useState, useRef } from "react";
-import { gsap } from "gsap";
+import React, { useState, useRef } from "react"
+import { gsap } from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { useGSAP } from "@gsap/react"
+import { User, Layers, Flag, FileText, ChevronDown } from "lucide-react"
 
-const features = [
+gsap.registerPlugin(ScrollTrigger)
+
+const MOTION = {
+  smooth: 0.5,
+  quick: 0.3
+}
+
+const services = [
   {
-    icon: "fa-user-circle",
-    title: "Personalized",
-    text: "You are matched with a therapist that fits your needs and style. We take the time to get to know you to make the right pairing.",
+    Icon: User,
+    title: "Personalized Care",
+    description: "Matched with a therapist that fits your needs and style. We take the time to understand you to make the right pairing.",
+    featured: true
   },
   {
-    icon: "fa-layer-group",
-    title: "Varied",
-    text: "We have a large variety of clinician specialties to take care of your needs, including trauma, suicidal ideations, major depression, anxiety, anger, OCD, and perinatal concerns.",
+    Icon: Layers,
+    title: "Comprehensive Specialties",
+    description: "Large variety of clinician expertise including trauma, PTSD, depression, anxiety, OCD, and perinatal concerns.",
+    featured: false
   },
   {
-    icon: "fa-flag",
-    title: "Specialized",
-    text: "As most of our clients are on active duty, we specialize in military-specific concerns, including PCS issues, deployments, and transitioning to civilian life.",
+    Icon: Flag,
+    title: "Military-Focused",
+    description: "Specialized in active duty concerns: PCS transitions, deployment support, and civilian life adjustments.",
+    featured: false
   },
   {
-    icon: "fa-file-alt",
-    title: "Prepared",
-    text: "Our owner, Dr. Lemich, is well-versed in military and VA paperwork, assisting with LIMDU, Med Board, VA, and Security Clearance paperwork if medically necessary.",
-  },
-];
+    Icon: FileText,
+    title: "Administrative Support",
+    description: "Expert assistance with LIMDU, Med Board, VA, and Security Clearance paperwork when medically necessary.",
+    featured: false
+  }
+]
 
-function ServiceCards() {
-  const [openIndex, setOpenIndex] = useState(null);
-  const [hoverIndex, setHoverIndex] = useState(null);
-  const textRefs = useRef([]);
+export default function MilitaryServices() {
+  const [openIndex, setOpenIndex] = useState(null)
+  const gridRef = useRef(null)
+  const sectionRef = useRef(null)
 
-  // GSAP hover animations for desktop cards
-  const handleMouseEnter = (index) => {
-    setHoverIndex(index);
-  };
+  // Desktop: Staggered scroll reveal
+  useGSAP(() => {
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches
 
-  const handleMouseLeave = (index) => {
-    setHoverIndex(null);
-  };
+    if (!prefersReducedMotion && window.innerWidth >= 768) {
+      const cards = gsap.utils.toArray('.service-card')
+      
+      gsap.from(cards, {
+        y: 40,
+        opacity: 0,
+        duration: MOTION.smooth,
+        ease: 'power2.out',
+        stagger: 0.12,
+        scrollTrigger: {
+          trigger: gridRef.current,
+          start: 'top 75%',
+          once: true
+        }
+      })
+    }
+  }, [])
 
-  const toggle = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
+  const toggleAccordion = (index) => {
+    const isOpening = openIndex !== index
+    setOpenIndex(isOpening ? index : null)
+    
+    // Animate chevron rotation
+    const chevron = document.querySelector(`.chevron-${index}`)
+    if (chevron) {
+      gsap.to(chevron, {
+        rotate: isOpening ? 180 : 0,
+        duration: MOTION.quick,
+        ease: 'power2.out'
+      })
+    }
+  }
 
   return (
-    <section className="content-module border border-t bg-slate-50">
-      <div className=" mx-auto px-4">
-        {/* Section Heading */}
-        <div className="text-center mb-12">
-          <h2 className="heading-primary mb-4 pt-5 text-5xl">Our Services</h2>
-          <p className="body-primary max-w-2xl mx-auto mb-5">
-            How we support active duty service members,
-            veterans, and their families.
+    <section 
+      ref={sectionRef}
+      className="py-24 md:py-32 bg-stone-50"
+    >
+      <div className="container mx-auto px-4 max-w-7xl">
+        
+        {/* Section Header */}
+        <div className="max-w-3xl mb-16">
+          <h2 className="text-4xl md:text-6xl font-semibold text-slate-900 mb-6 leading-tight">
+            How we serve those who serve
+          </h2>
+          <p className="text-lg md:text-xl text-slate-600 leading-relaxed">
+            Specialized support for active duty service members, veterans, and military spouses navigating mental health challenges.
           </p>
         </div>
 
-        {/* Desktop Grid */}
-        <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-8 pb-5">
-          {features.map((feature, index) => (
-            <div
-              key={index}
-              className="p-6 rounded-2xl bg-slate-50 border border-stone-200 transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg"
+        {/* Desktop: Bento Grid */}
+        <div 
+          ref={gridRef}
+          className="hidden md:grid grid-cols-12 gap-6 lg:gap-8"
+        >
+          {/* Featured Card - Spans 2 columns, 2 rows */}
+          <div className="service-card col-span-6 row-span-2 bg-white border border-stone-200 rounded-lg p-8 hover:shadow-lg transition-shadow duration-300">
+            <div className="mb-6">
+              <User className="w-12 h-12 text-slate-700" strokeWidth={1.5} />
+            </div>
+            <h3 className="text-2xl font-semibold text-slate-900 mb-4">
+              {services[0].title}
+            </h3>
+            <p className="text-base text-slate-600 leading-relaxed">
+              {services[0].description}
+            </p>
+          </div>
+
+          {/* Standard Cards */}
+          {services.slice(1).map((service, index) => (
+            <div 
+              key={index + 1}
+              className="service-card col-span-6 bg-white border border-stone-200 rounded-lg p-6 hover:shadow-lg transition-shadow duration-300"
             >
-              <div className="mb-6 text-stone-600">
-                <i className={`fas ${feature.icon} fa-2x`}></i>
+              <div className="mb-4">
+                <service.Icon className="w-10 h-10 text-slate-700" strokeWidth={1.5} />
               </div>
               <h3 className="text-xl font-semibold text-slate-900 mb-3">
-                {feature.title}
+                {service.title}
               </h3>
-              <p className="body-primary">{feature.text}</p>
+              <p className="text-base text-slate-600 leading-relaxed">
+                {service.description}
+              </p>
             </div>
           ))}
         </div>
 
-        {/* Mobile Accordion - Hero Style */}
-        <div className="md:hidden pb-5">
-          {features.map((feature, index) => (
-            <div
+        {/* Mobile: Accordion */}
+        <div className="md:hidden space-y-2">
+          {services.map((service, index) => (
+            <div 
               key={index}
-              className="border-b border-b-gray-300 py-3 cursor-pointer"
-              onClick={() => toggle(index)}
-              onMouseEnter={() => handleMouseEnter(index)}
-              onMouseLeave={() => handleMouseLeave(index)}
+              className="border-b border-stone-200 pb-4"
             >
-              <div className="flex justify-between items-center">
-                <div className="flex items-center gap-3">
-                  <i className={`fas ${feature.icon} text-slate-600`}></i>
-                  <p className="font-semibold mb-0 text-slate-900">{feature.title}</p>
+              <button
+                onClick={() => toggleAccordion(index)}
+                className="w-full flex items-center justify-between py-4 text-left"
+                aria-expanded={openIndex === index}
+              >
+                <div className="flex items-center gap-4">
+                  <service.Icon className="w-6 h-6 text-slate-600" strokeWidth={1.5} />
+                  <span className="text-lg font-semibold text-slate-900">
+                    {service.title}
+                  </span>
                 </div>
-                <span className="text-xl text-slate-600">
-                  {openIndex === index ? "−" : "+"}
-                </span>
-              </div>
-
-              {/* Mobile expand (click) */}
+                <ChevronDown 
+                  className={`chevron-${index} w-5 h-5 text-slate-600 transition-transform`}
+                  style={{ transform: openIndex === index ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                />
+              </button>
+              
               {openIndex === index && (
-                <div className="mt-3 text-gray-600 text-sm pl-8">
-                  {feature.text}
+                <div className="pl-10 pr-4 pb-2">
+                  <p className="text-base text-slate-600 leading-relaxed">
+                    {service.description}
+                  </p>
                 </div>
               )}
             </div>
           ))}
         </div>
+
       </div>
     </section>
-  );
+  )
 }
-
-export default ServiceCards;
